@@ -1,0 +1,170 @@
+// Mixins
+
+// Visually hidden
+// Description: Hide from both screenreaders and browsers.
+// Example: @include hidden;
+@mixin hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+// CSS3 Pie
+// Description: Incude css pie on the chosen element
+// Make sure PIE.htc file is in your stylesheets folder
+// Example: @include css3Pie;
+@mixin css3Pie {
+  behavior: url("PIE.htc");
+}
+
+// prefixedTransition
+// Description: Adds prefixed transitions
+// Example: @include prefixedTransition(all, 400ms, ease-out);
+@mixin prefixedTransition($type:all, $speed:400ms, $easing:linear ) {
+  -webkit-transition:   $type $speed $easing;
+  -moz-transition:      $type $speed $easing;
+  -o-transition:        $type $speed $easing;
+  -ms-transition:       $type $speed $easing;
+  transition:           $type $speed $easing;
+}
+
+// Font Icon
+// Description: Use font for icons in all all broswer EVEN IE7
+// CharaterCode: Example \f001, 
+// Psudeo: Defaults to :before if left blank, set to true if want :after 
+// Example: @include font-icon( CharaterCode, Psudeo );
+
+// In Practice:
+// .icon {
+// font-size:5em;
+// font-family:'FontAwesome';
+// line-height:normal;
+// }
+// .icon-num1 { @include font-icon(\f000) } // Uses Before Psuedo
+// .icon-num2 { @include font-icon(\f001, true) } // Uses After Psuedo
+
+// Note: Be sure you have imported the font
+
+@mixin font-icon($char, $after:false ) {
+  .ie7 & { zoom: expression( this.runtimeStyle['zoom'] = "1", this.innerHTML = '#{$char}' ) };
+
+  @if $after {
+    &:after,
+    & .after { content: '#{$char}' }
+  } @else {
+    &:before,
+    & .before { content: '#{$char}' }
+  }
+}
+
+
+// IconsHoverFocus
+// Description: setIcon hovers up for sprite sheeted elements
+// Pass the array of icons to apply to. And the suffix if its not "active"
+// Example: @include iconsHoverFocus($array, optional);
+@mixin iconsHoverFocus($array, $suffix: -active) {
+  @each $class in $array { 
+    &:focus .#{$class},
+    &:hover .#{$class}{ 
+      @extend .#{$class}#{$suffix};
+    }
+  }
+}
+
+// RETINARIZE
+// Description: set up sprite sheet srpites for both norma and retina displays
+// Example: @include retinarize($spritesArray, $retinaSprites, $retinaSprites, icon-name);
+
+@mixin retinarize( $sprite, $array:$SPRITES_ARRAY, $normalMap:$SPRITE_MAP, $retinaMap:$RETINA_SPRITE_MAP ) {
+    $maxW : 0;
+    @each $s in $array { 
+      $w : image-width( sprite-file($retinaMap, $s) );
+      @if $maxW < $w { $maxW : $w; } 
+    }
+    
+    background  : sprite( $normalMap, $sprite );
+    width       : image-width(  sprite-file( $normalMap, $sprite ) );
+    height      : image-height( sprite-file( $normalMap, $sprite ) );
+    display     : block;
+
+    @media only screen and (-webkit-min-device-pixel-ratio : 1.5),
+    only screen and (min-device-pixel-ratio : 1.5) {
+      background          : sprite($retinaMap, $sprite);
+      background-position : floor( nth( sprite-position($retinaMap, $sprite), 1 ) / 2  ) floor( nth( sprite-position($retinaMap, $sprite), 2 ) / 2 );
+      width               : image-width(  sprite-file( $normalMap, $sprite ) );
+      height              : image-height( sprite-file( $normalMap, $sprite ) );
+      background-size     : $maxW / 2;
+      display             : block;
+    }
+}
+
+
+@mixin button( $baseColor, $iconFile: null ){
+
+  @if $iconFile{
+    $iconFile: url(../img/icon-#{$iconFile}.svg);
+    background-position: 16px 50%, 0 0;
+    padding-left: 36px;
+  }@else{
+    padding-left: 15px
+  }
+  @include background-image( $iconFile, linear-gradient( $baseColor, darken( $baseColor, 7% ) ) );
+  background-repeat: no-repeat;
+  border: 1px solid darken( $baseColor, 12% );
+  @include box-shadow( 0 1px 0 rgba(255, 255, 255, .2) );
+  @include border-radius( 3px );
+  font-family: $sansSerif;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 15px;
+  text-shadow: none;
+
+  &:active{
+    @include background-image( $iconFile, linear-gradient( darken( $baseColor, 7% ), $baseColor ) );
+    @include box-shadow( 0 1px 0 rgba(255, 255, 255, .2), 0 1px 0 rgba(0, 0, 0, .15) inset );
+  }
+}
+
+// Visually hidden
+// Description: Hide only visually, but have it available for screenreaders.
+// Example: @include visuallyhidden;
+@mixin visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  // Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard.
+  &.focusable:active, &.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+// Invisible
+// Description: Hide visually and from screenreaders, but maintain layout.
+// Example: @include invisible;
+@mixin invisible {
+  visibility: hidden;
+}
+
+// Clear fix
+// Description: Contain floats
+// Example: @include clearfix;
+@mixin clearfix {
+  &:before, &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  zoom: 1;
+}

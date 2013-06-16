@@ -1,0 +1,100 @@
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min-resolution: 144dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+
+
+@media handheld, only screen and (max-width: 1000px) {
+
+	.ch-grid{
+    display:none;
+  }
+
+  .works .thumb-container a{
+    span{
+         display:none;
+    }
+  }
+
+  .divider{
+    margin:20px 20px 30px 20px;
+  }
+
+  .main-nav li a{
+    font-size:22px;
+  }
+
+  .header-alt, header{
+    .row{
+      &.sixcol{
+        width:100%;
+      }
+    }
+  }
+
+  .logo-grid li{
+    width:150px;
+    margin-right:10px;
+    
+  }
+
+  .resize{
+    display:none;
+  }
+
+  .ch-grid {
+    li {
+        margin: 20px 20px 20px 0; 
+      } 
+    }
+ 
+
+  .centered-img, .header-alt{
+    height:auto;
+    width:100%;
+
+    .inner{
+      padding-top:50px;
+      margin-bottom: 50px;
+      display:block;
+      float: left;
+    }
+
+    h1{
+      font-size:50px;
+      line-height: normal;
+    }
+  }
+
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}

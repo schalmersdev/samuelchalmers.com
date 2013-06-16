@@ -1,0 +1,82 @@
+h1, h2, h3, h4{
+	font-style:normal;
+}
+h1 { 
+	margin:0 0 15px 0; 
+	line-height:normal;
+	color:white;
+	text-transform: uppercase;
+	line-height: 40px;
+	font-size:50px;
+	border-bottom:4px solid $COLOR-ORANGE;
+	font-family: "atrament-web",Georgia,sans-serif;
+	font-weight: normal;	
+}
+
+h2 { 
+	margin:0 0 15px 0; 
+	line-height:normal;
+	color:#292929;
+	text-transform: uppercase; 
+	font-family: "atrament-web",Georgia,sans-serif;
+	font-weight: normal;
+	font-size: 35px;
+
+	.main-content & {
+		border-bottom:2px solid $COLOR-ORANGE;
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+		display:block;}
+	}
+	
+h3 { 
+	margin:0 0 15px 0; 
+	font-family: "atrament-web",Georgia,sans-serif;
+	font-weight: normal;
+	line-height:normal; }
+	
+h4 { 
+	margin:0 0 15px 0; 
+	line-height:normal; }
+	
+h5 { 
+	margin:0 0 15px 0; 
+	line-height:normal; }
+	
+h6 { 
+	margin:0 0 15px 0; 
+	line-height:normal; }
+
+p{
+	line-height:30px;
+	margin:0 0 30px 0;
+	font-size: 17px;
+	font-family: "ff-tisa-web-pro";
+	color:#6b6b6b;
+
+	&.introduction{
+		font-size: 25px;
+		color:#212121;
+		font-style: italic;
+	}
+	
+}
+
+a{
+	color:$COLOR-ORANGE;
+	font-weight:bold;
+	text-decoration:none;
+	font-style:italic;
+	white-space: nowrap;
+	-webkit-transition: color 0.4s ease-in-out;
+    -moz-transition: color 0.4s ease-in-out;
+    -o-transition: color 0.4s ease-in-out;
+    -ms-transition: color 0.4s ease-in-out;
+    transition: color 0.4s ease-in-out;
+
+	&:hover{
+		color:#333;
+	}
+
+}
+	
